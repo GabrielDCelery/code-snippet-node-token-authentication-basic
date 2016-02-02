@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var morgan = require('morgan');
 var jwt = require('jsonwebtoken');
 
-var User = require('./app/user');
+var User = require('./app/models/user');
 var config = require('./config');
 
 var app = express();
