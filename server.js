@@ -39,16 +39,6 @@ app.get('/setup', function (req, res){
 
 var apiRoutes = express.Router();
 
-apiRoutes.get('/', function (req, res){
-	res.json({message: 'Welcome to the coolest API on the World!'});
-})
-
-apiRoutes.get('/users', function (req, res){
-	User.find({}, function (err, users){
-		res.json(users);
-	})
-})
-
 apiRoutes.post('/authenticate', function (req, res){
 	User.findOne({name: req.body.name}, function (err, user){
 		if(err) throw err;
@@ -64,6 +54,36 @@ apiRoutes.post('/authenticate', function (req, res){
 		}
 	})
 })
+
+apiRoutes.use(function (req, res, next){
+	var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+	if(token){
+		jwt.verify(token, app.get('superSecret'), function (err, decoded){
+			if(err) {
+				res.json({success: false, message: 'Failed to authenticate token'})
+			} else {
+				req.decoded = decoded;
+				next();
+			}
+		})
+	} else {
+		res.status(403).send({success: false, message: 'No token provided'})
+	}
+
+})
+
+
+apiRoutes.get('/', function (req, res){
+	res.json({message: 'Welcome to the coolest API on the World!'});
+})
+
+apiRoutes.get('/users', function (req, res){
+	User.find({}, function (err, users){
+		res.json(users);
+	})
+})
+
 
 
 app.use('/api', apiRoutes);
