@@ -1,0 +1,26 @@
+{
+  "name": "practice-node-token-authentication-basic",
+  "version": "1.0.0",
+  "description": "Token based authentication for node server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GabrielDCelery/practice-node-token-authentication-basic.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GabrielDCelery/practice-node-token-authentication-basic/issues"
+  },
+  "homepage": "https://github.com/GabrielDCelery/practice-node-token-authentication-basic#readme",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "express": "^4.13.4",
+    "jsonwebtoken": "^5.5.4",
+    "mongoose": "^4.3.7",
+    "morgan": "^1.6.1"
+  }
+}
